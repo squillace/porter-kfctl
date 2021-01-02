@@ -1,11 +1,11 @@
 package main
 
 import (
-	"get.porter.sh/mixin/skeletor/pkg/skeletor"
 	"github.com/spf13/cobra"
+	"github.com/squillace/porter-kfctl/pkg/kfctl"
 )
 
-func buildInvokeCommand(m *skeletor.Mixin) *cobra.Command {
+func buildInvokeCommand(m *kfctl.Mixin) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "invoke",
 		Short: "Execute the invoke functionality of this mixin",

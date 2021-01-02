@@ -1,4 +1,4 @@
-module get.porter.sh/mixin/skeletor
+module github.com/squillace/porter-kfctl
 
 go 1.13
 

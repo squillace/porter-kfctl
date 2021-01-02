@@ -1,5 +1,5 @@
 install:
-  - skeletor:
+  - kfctl:
       description: "Invalid Input Test Case"
       args:
       - yarrrr

@@ -4,40 +4,40 @@
     "installStep": {
       "type": "object",
       "properties": {
-        "skeletor": {"$ref": "#/definitions/skeletor"}
+        "kfctl": {"$ref": "#/definitions/kfctl"}
       },
       "required": [
-        "skeletor"
+        "kfctl"
       ],
       "additionalProperties": false
     },
     "upgradeStep": {
       "type": "object",
       "properties": {
-        "skeletor": {"$ref": "#/definitions/skeletor"}
+        "kfctl": {"$ref": "#/definitions/kfctl"}
       },
       "required": [
-        "skeletor"
+        "kfctl"
       ],
       "additionalProperties": false
     },
     "invokeStep": {
       "type": "object",
       "properties": {
-        "skeletor": {"$ref": "#/definitions/skeletor"}
+        "kfctl": {"$ref": "#/definitions/kfctl"}
       },
       "required": [
-        "skeletor"
+        "kfctl"
       ],
       "additionalProperties": false
     },
     "uninstallStep": {
       "type": "object",
       "properties": {
-        "skeletor": {"$ref": "#/definitions/skeletor"}
+        "kfctl": {"$ref": "#/definitions/kfctl"}
       },
       "required": [
-        "skeletor"
+        "kfctl"
       ],
       "additionalProperties": false
     },
@@ -74,7 +74,7 @@
         ]
       }
     },
-    "skeletor": {
+    "kfctl": {
       "type": "object",
       "properties": {
         "description": {
