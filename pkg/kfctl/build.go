@@ -1,6 +1,8 @@
 package kfctl
 
 import (
+	"fmt"
+
 	"get.porter.sh/porter/pkg/exec/builder"
 	yaml "gopkg.in/yaml.v2"
 )
@@ -52,10 +54,37 @@ func (m *Mixin) Build() error {
 		m.ClientVersion = suppliedClientVersion
 	}
 
-	//fmt.Fprintf(m.Out, dockerfileLines)
+	const dockerfileLines = `RUN apt-get update && apt-get install gnupg apt-transport-https lsb-release software-properties-common -y
+		curl 
+	
+	`
+	/*
+
+	   	fmt.Fprintln(m.Out, `RUN wget --no-check-certificate https://raw.githubusercontent.com/stedolan/jq/master/sig/jq-release.key -O /tmp/jq-release.key && \
+	       wget --no-check-certificate https://raw.githubusercontent.com/stedolan/jq/master/sig/v${JQ_VERSION}/jq-linux64.asc -O /tmp/jq-linux64.asc && \
+	       wget --no-check-certificate https://github.com/stedolan/jq/releases/download/jq-${JQ_VERSION}/jq-linux64 -O /tmp/jq-linux64 && \
+	       gpg --import /tmp/jq-release.key && \
+	       gpg --verify /tmp/jq-linux64.asc /tmp/jq-linux64 && \
+	       cp /tmp/jq-linux64 /usr/bin/jq && \
+	       chmod +x /usr/bin/jq && \
+	       rm -f /tmp/jq-release.key && \
+	       rm -f /tmp/jq-linux64.asc && \
+	   	rm -f /tmp/jq-linux64`)
+	*/
+
+	// curl https://github.com/kubeflow/kfctl/releases/v1.2.0 | grep -o -m 1 "kfctl_v1.2.0.*linux.tar.gz" // does result in the single download file name.
+
+	fmt.Fprintf(m.Out, `RUN curl -L https://github.com/kubeflow/kfctl/releases/download/v1.2.0/kfctl_v1.2.0-0-gbc038f9_linux.tar.gz --output kfctl.tar.gz && \
+		tar -xvf kfctl.tar.gz && \
+		cp kfctl /usr/bin/ && \
+		curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.14 TARGET_ARCH=x86_64 sh - && \
+		cp istio-1.6.14/bin/istioctl /usr/bin/
+		
+	
+	`)
 
 	// Example of pulling and defining a client version for your mixin
-	// fmt.Fprintf(m.Out, "\nRUN curl https://get.helm.sh/helm-%s-linux-amd64.tar.gz --output helm3.tar.gz", m.ClientVersion)
+	// fmt.Fprintf(m.Out, "\nRUN curl -L https://github.com/kubeflow/kfctl/releases/download/v1.2.0/kfctl_v1.2.0-0-gbc038f9_linux.tar.gz --output kfctl.tar.gz", m.ClientVersion)
 
 	return nil
 }
